@@ -45,13 +45,3 @@ This project was developed as a 2-person group collaboration for our Data Struct
 * Architecting the core C++ backend and standardizing the JSON serialization pipeline.
 * Writing the non-STL foundational data structures (custom Stacks, Queues, Heaps).
 * Implementing the complex graph traversal logic, specifically Dijkstra's Shortest Path and Prim's MST algorithms.
-
-## ⚙️ How to Run Locally
-
-Because this project utilizes WebAssembly, it must be run over a local HTTP server (browsers block WASM fetching over the `file://` protocol due to CORS policy).
-
-1. Clone the repository.
-2. Open your terminal in the project directory.
-3. Start a local server. For example, using Python 3:
-   ```bash
-   python -m http.server 8000
