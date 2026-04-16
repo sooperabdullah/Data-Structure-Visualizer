@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: monospace;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+            color: white;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%) scale(0.40);  /* ← ZOOM OUT HERE */
+            object-fit: cover;
+}
+
+        /* Dark overlay for better text readability */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: -1;
+        }
+
+        /* Website Name - Top Left */
+        .logo {
+            position: absolute;
+            text-decoration: none;
+            color: white;
+            top: 30px;
+            left: 64px;
+            font-size: 28px;
+            font-weight: bold;
+            z-index: 10;
+            letter-spacing: 2px;
+        }
+
+        /* Content Container - Middle Left */
+        .content {
+            position: absolute;
+            top: 60%;
+            left: 4%;
+            transform: translateY(-50%);
+            z-index: 10;
+            text-align: left;
+            max-width: 600px;
+        }
+
+        .content h1 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .content p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .btn {
+            padding: 14px 25px;
+            font-size: 18px;
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            text-decoration: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            letter-spacing: 1px;
+            
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <!-- Replace with your own video or use a free stock one -->
+        <source src="videoback-vmake.mp4" type="video/mp4">
+    </video>
+
+    <!-- Dark overlay -->
+    <div class="overlay"></div>
+
+    <!-- Website Name -->
+    <a href="index1.html" class="logo">Structr.</a>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to the <br> Data Structures Vizualizer</h1>
+        <p>Visualize the Data Structures in real time now.</p>
+        <a href="index.html" class="btn">
+            Visualize!
+        </a>
+    </div>
+
+    <script>
+        // Optional: Add a fallback if video fails to load
+        const video = document.getElementById('bg-video');
+        video.addEventListener('error', function() {
+            document.body.style.background = 'linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d)';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structure Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>        
+        <!-- TOP HORIZONTAL NAVIGATION -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="index1.html" class="logo">Structr.</a>
+
+            <!-- Centered buttons -->
+            <nav class="operations-menu">
+            <a href="#heap-view"   data-target="heap-view"   onclick="changeView('heap-view')"   class="menu-btn">Binary Heap</a>
+            <a href="#avl-view"    data-target="avl-view"    onclick="changeView('avl-view')"    class="menu-btn">AVL Tree</a>
+            <a href="#graph-view"  data-target="graph-view"  onclick="changeView('graph-view')"  class="menu-btn">Graph & Algos</a>
+            <a href="#hash-view"   data-target="hash-view"   onclick="changeView('hash-view')"   class="menu-btn">Hash Table</a>
+            </nav>
+        </header>
+
+        <!-- Main Content Wrapper -->
+        <div class="content-wrapper">
+            
+            <!-- Main Content Area -->
+            <div class="main-content">
+                
+                <!-- HEAP View -->
+                <div id="heap-view" class="view active">
+                    <h2>  Min Heap Operations</h2>
+                    <div class="controls">
+                        <div class="control-group">
+                            <label for="heap-init-size">Size:</label>
+                            <input type="number" id="heap-init-size" value="10" min="1">
+                            <button onclick="HeapApp.init()">Initialize</button>
+                        </div>
+                        <div class="control-group">
+                            <label for="heap-insert-value">Insert Value:</label>
+                            <input type="number" id="heap-insert-value" value="20">
+                            <button onclick="HeapApp.insert()">Insert</button>
+                        </div>
+                        <div class="control-group">
+                            <button onclick="HeapApp.extract()">Extract Min</button> 
+                        </div>
+                    </div>
+                    <div class="visualization-area">
+                        <h3>Heap Structure (Tree & Array)</h3>
+                        <svg id="heap-canvas" width="100%" height="700">
+                             <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ccc">Waiting for Heap Initialization...</text>
+                        </svg>
+                        <div id="heap-array-view" class="array-view">
+                            <p style="color:white; margin: 0;">Array View: Initialize the Heap to see the contents.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AVL View -->
+                <div id="avl-view" class="view">
+                    <h2>AVL Tree Operations</h2>
+                    <div class="controls">
+                        <div class="control-group">
+                            <button onclick="AVLApp.init()">Initialize Tree</button>
+                        </div>
+                        <div class="control-group">
+                            <label for="avl-insert-value">Insert Value:</label>
+                            <input type="number" id="avl-insert-value" value="10" placeholder="Value">
+                            <button onclick="AVLApp.insert()">Insert</button>
+                        </div>
+                        <div class="control-group">
+                            <label for="avl-delete-key">Delete Key:</label>
+                            <input type="number" id="avl-delete-key" placeholder="Key to Delete">
+                            <button onclick="AVLApp.delete()">Delete</button>
+                        </div>
+                    </div>
+                    <div class="visualization-area">
+                        <h3>AVL Tree Structure (Balance Factor & Height)</h3>
+                        <svg id="avl-canvas" width="100%" height="700">
+                             <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ccc">Initialize the AVL Tree</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- GRAPH View -->
+                <div id="graph-view" class="view">
+                    <h2>Graph Algorithms (BFS, DFS, Dijkstra, Prim's)</h2>
+                    <div class="controls">
+                        <!-- Graph Setup Group -->
+                        <div class="control-group half-width">
+                            <label for="graph-init-size">Num Vertices:</label>
+                            <input type="number" id="graph-init-size" value="7" min="2">
+                            <button onclick="GraphApp.init()">Initialize Graph</button>
+                        </div>
+                        <!-- Edge Control Group -->
+                        <div class="control-group half-width">
+                            <label>From: <input type="number" id="edge-from" value="0" min="0" max="6" style="width: 30%;"></label>
+                            <label>To: <input type="number" id="edge-to" value="1" min="0" max="6" style="width: 30%;"></label>
+                            <label>Weight: <input type="number" id="edge-weight" value="1" min="1" style="width: 25%;"></label>
+                            <button onclick="GraphApp.addEdge()">Add Edge</button>
+                            <button onclick="GraphApp.removeEdge()">Remove Edge</button>
+                        </div>
+                    </div>
+
+                    <div class="visualization-area">
+                        <svg id="graph-canvas" width="100%" height="700"></svg>
+                    </div>
+                    
+                    <div class="algorithm-controls controls">
+                        <h3>Algorithm Control</h3>
+                        <!-- Start Node and Step Controls -->
+                        <div class="control-group">
+                            <label for="algo-start-node">Start Node:</label>
+                            <input type="number" id="algo-start-node" value="0" min="0" max="6">
+                            <button id="algo-step-button" onclick="GraphApp.stepAlgorithm()" style="display: none;">Next Step</button>
+                            <button onclick="GraphApp.resetAlgorithmState()">Reset Algorithm State</button>
+                        </div>
+                        
+                        <!-- Algorithm Execution Buttons -->
+                        <div class="control-group">
+                            <button onclick="GraphApp.startBFS()">Run BFS</button>
+                            <button onclick="GraphApp.startDFS()">Run DFS</button>
+                            <button onclick="GraphApp.startDijkstra()">Run Dijkstra (SP)</button>
+                            <button onclick="GraphApp.startPrims()">Run Prim's (MST)</button>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- HASH View -->
+                <div id="hash-view" class="view">
+                    <h2>Hash Table Operations (Chaining)</h2>
+                    <div class="controls">
+                         <div class="control-group">
+                            <label for="hash-init-size">Buckets (Size):</label>
+                            <input type="number" id="hash-init-size" value="10" min="5">
+                            <button onclick="HashApp.init()">Initialize</button>
+                        </div>
+                        <div class="control-group">
+                            <label for="hash-insert-key">Key:</label>
+                            <input type="number" id="hash-insert-key" value="50" placeholder="Value">
+                            <button onclick="HashApp.insert()">Insert</button>
+                            <button onclick="HashApp.search()">Search</button>
+                            <button onclick="HashApp.delete()">Delete</button>
+                        </div>
+                    </div>
+                    <div class="visualization-area">
+                        <h3>Hash Buckets and Chains</h3>
+                        <div id="hash-table-view">
+                            <p style="color:#999; margin: 0;">Initialize the Hash Table to see the buckets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Shared Log Footer -->
+            <footer class="log-footer">
+                <h2>Operation Log & Algorithm State</h2>
+                <div class="log-content">
+                    <div id="queue-state" class="state-box">Queue/Stack/PQ: [ ]</div>
+                    <div id="step-log" class="log-output"></div>
+                </div>
+            </footer>
+        </div>
+
+    <!-- Emscripten glue code loads the WASM module -->
+    <script src="visualizer.js"></script> 
+    
+    <!-- Separate App Logic Files -->
+    <script src="main.js"></script>
+    <script src="heap.js"></script>
+    <script src="graph.js"></script>
+    <script src="avl.js"></script>
+    <script src="hash.js"></script>
+    
+</body>
+</html>
